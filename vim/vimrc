@@ -1,0 +1,363 @@
+" __  ____   ____     _____ __  __ ____   ____ 
+"|  \/  \ \ / /\ \   / /_ _|  \/  |  _ \ / ___|
+"| |\/| |\ V /  \ \ / / | || |\/| | |_) | |    
+"| |  | | | |    \ V /  | || |  | |  _ <| |___ 
+"|_|  |_| |_|     \_/  |___|_|  |_|_| \_\\____|
+"                                              
+"
+
+
+" ==========
+" ===System　前五行使vim可以支持老版本
+" ==========
+
+" 不与vi兼容（采用vim自己的操作命令）
+set nocompatible
+
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+
+" 支持使用鼠标
+set mouse=a
+
+" 使用utf-8编码
+set encoding=utf-8
+
+
+
+
+
+
+
+" ===========================================================
+
+
+" ==========
+" ===Main code display
+" ==========
+
+" 显示行号
+set number
+
+" 显示光标所在的当前行行号，其他行都为相对于改行的相对行号。
+set relativenumber
+" set norelativenumber 前面有个no就是不这样显示的意思。
+
+" 在状态栏显示光标当前位置（第几行，第几列）
+set ruler
+
+" 让当前行有一条横线（光标所在当前行高亮）。
+set cursorline
+
+" 打开语法高亮，自动识别代码，使用多种颜色显示。
+syntax enable
+syntax on
+
+" 垂直滚动时，光标距离顶部/底部的位置（单位：行）
+set scrolloff=5 
+
+" 水平滚动时，光标距离行首/行尾的位置（单位：字符）。该配置在不拆行时比较有用。
+" set sidescrolloff=15
+
+
+" 开启文件类型检查，并且载入与该类型对应的缩进规则。
+" 如：文件为.py文件，vim就会找python的缩进规则。
+" ~/.vim/indent/python.vim
+
+" 设置行宽，即一行显示多少个字符。
+" set textwidth=80
+
+" 自动拆行，即太长的行分成几行显示。
+" set wrap
+" 关闭自动拆行。
+" set nowrap
+
+" 只有遇到指定的符号（如：空格、连词号和其他标点符号），才拆行。即：不会在单词内拆行。
+" set linebreak
+
+" 指定拆行出与编辑窗口的右边缘之间空出的字符数。(强迫症需要）
+" set wrapmargin=2
+
+
+
+
+
+" ===========================================================
+
+
+" ==========
+" === Status/command bar
+" ==========
+
+" 是否显示状态行，0表示不显示；1表示只在多窗口时显示；2表示显示。
+set laststatus=2
+
+" 在底部显示，当前处于命令模式还是插入模式。
+set showmode
+
+" 输入的命令显示出来，看的清楚些。
+set showcmd
+
+
+
+
+
+
+
+
+" ===========================================================
+
+" ==========
+" Searching options
+" ==========
+
+" 光标遇到圆括号、方括号、大括号时，自动高亮对应的另一个圆括号、方括号和大括号。
+set showmatch
+
+" 搜索高亮
+set hlsearch
+" 因为上次搜索的内容在关闭vim后，重新打开，此句执行后将取消之前搜索的高亮。
+exec "nohlsearch"
+
+" 输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果。
+set incsearch
+
+" 忽略大小写
+set ignorecase
+
+" 如果同时开启set ignorecase，那么对只有一个大写字母的搜索词，将大小写敏感，其他情况都是大小写不敏感。如搜Test时，将不匹配test;搜test时，将匹配Test.
+set smartcase
+
+
+
+
+
+
+
+
+
+
+
+
+
+" ===========================================================
+
+" ==========
+" ===　缩进
+" ==========
+
+" 按下回车后下一行的缩进会自动跟上一行的缩进一致。
+set autoindent
+
+" 按下ｔａｂ键时，vim显示的空格数。
+set tabstop=4
+
+" 在文本上按下 >> （增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。
+set shiftwidth=4
+
+" 由于ｔａｂ键在不同的编辑器缩进不一致，该设置自动将tab转为空格。
+set expandtab
+
+" tab转为多少个空格。
+set softtabstop=4
+
+
+
+
+
+
+
+
+
+" ===========================================================
+
+
+" ==========
+" === 更改键位 noremap (示例：noremap n h) 指把 n 改成 h 的功能
+" ==========
+
+
+
+
+
+" ===========================================================
+
+
+" ==========
+" === Edit
+" ==========
+
+" 打开英语单词的拼写检查。(用汉语的同学需要注意，很亮眼的）
+" set spell spelllang=en_us
+
+" 不创建备份文件。默认情况下，文件保存时，会额外创建一个备份文件，它的文件名是在原文件名的末尾，再添加一个波浪号(~).
+" set nobackup
+
+" 不创建交换文件，交换文件主要用于系统崩溃时恢复文件，文件名开头是"."、结尾是".swp"。
+" set noswapfile
+
+" 保留撤销历史。Vim 会在编辑时保存操作历史，用来供用户撤消更改。默认情况下，操作记录只在本次编辑时有效，一旦编辑结束、文件关闭，操作历史就消失了。打开这个设置，可以在文件关闭后，操作记录保留在一个文件里面，继续存在。这意味着，重新打开一个文件，可以撤销上一次编辑时的操作。撤消文件是跟原文件保存在一起的隐藏文件，文件名以.un~开头。
+" set undofile
+
+" 设置备份文件、交换文件、操作历史文件的保存位置。
+" 结尾的//表示生成的文件名带有绝对路径，路径中用％替换目录分隔符，这样可以防止文件重名。
+" set backupdir=~/.vim/.backup//
+" set directory=~/.vim/.swp//
+" set undodir=~/.vim/.undo//
+
+" 自动切换工作目录。这主要用在一个 Vim 会话之中打开多个文件的情况，默认的工作目录是打开的第一个文件的目录。该配置可以将工作目录自动切换到，正在编辑的文件的目录。
+" set autochdir
+
+" 出错时，不要发出响声。
+" set noerrorbells
+
+" 出错时，发出视觉提示，通常是屏幕闪烁。
+" set visualbell
+
+" vim需要记住多少次操作记录。
+set history=1000
+
+" 打开文件监视，如果在编辑过程中发生外部改变（比如被别的编辑器编辑了），就会发出提示。
+" set autoread
+
+
+" 如果行尾有多余的空格（包括 Tab 键），该配置将让这些空格显示成可见的小方块。
+set listchars=tab:»■,trail:■
+set list
+
+" 命令模式下，底部操作指令按下tab键自动补全。第一次按下tab键会提示所有匹配的操作指令的清单；第二次按下tab会一次选择各个指令。
+set wildmenu
+set wildmode=longest:list,full
+
+
+
+
+
+
+" 以下部分为插件部分，暂未梳理。
+
+
+" ===========================================================
+
+
+" ==========
+" ===Install Plugins with Vim-Plug
+" ==========
+
+call plug#begin('~/.vim/plugged')
+
+" File Navigation
+Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+
+" ===
+"You Comlete ME
+"ale #检查代码插件
+
+" 美化插件
+Plug 'vim-airline/vim-airline'
+
+" snazzy配色
+Plug 'connorholyday/vim-snazzy'
+" 更改为snazzy配色
+color snazzy
+
+" Taglist 检测函数列表
+Plug 'majutsushi/tagbar', {'on':'TagbarOpenAutoClose'}
+
+" Markdown-preview
+Plug 'iamcco/markdown-preview.vim'
+"Plug 'suan/vim-instant-markdown', {'for':'markdown'}
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'vimwiki/vimwiki'
+
+"vim-table-mode #自动补全表格格式
+Plug 'dhruvasagar/vim-table-mode', {'on':'TableModeToggle'}
+
+"Python-syntax
+
+"vim-indent-guide #显示缩进分块
+Plug 'nathanaelkane/vim-indent-guides'
+
+"Goyo #只显示集中部分的插件
+
+"vim-signiture #代码书签
+Plug 'mhinz/vim-signify'
+
+"Undotree #显示文件版本历史，救命用的插件
+
+call plug#end()
+
+
+
+
+
+
+
+
+" ===========================================================
+
+
+" ==========
+" ===Markdown-preview
+" ==========
+"Uncomment to override defaults:
+"let g:instant_markdown_slow = 1
+"let g:instant_markdown_autostart = 0
+"let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_allow_unsafe_content = 1
+"let g:instant_markdown_allow_external_content = 0
+"let g:instant_markdown_mathjax = 1
+"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+"let g:instant_markdown_autoscroll = 0
+"let g:instant_markdown_port = 8888
+"let g:instant_markdown_python = 1
+
+let g:mkdp_path_to_chrome = ""
+" 设置 chrome 浏览器的路径（或是启动 chrome（或其他现代浏览器）的命令）
+" 如果设置了该参数, g:mkdp_browserfunc 将被忽略
+
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+" vim 回调函数, 参数为要打开的 url
+
+let g:mkdp_auto_start = 0
+" 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
+    " markdown 文件的时候打开一次
+
+let g:mkdp_auto_open = 0
+" 设置为 1 在编辑 markdown 的时候检查预览窗口是否已经打开，否则自动打开预
+" 览窗口
+
+let g:mkdp_auto_close = 1
+" 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不
+" 自动关闭预览窗口
+
+let g:mkdp_refresh_slow = 0
+" 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
+" 更新预览
+
+let g:mkdp_command_for_global = 0
+" 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
+" 文件可以使用改命令
+
+let g:mkdp_open_to_the_world = 0
+" 设置为 1, 在使用的网络中的其他计算机也能访问预览页面
+" 默认只监听本地（127.0.0.1），其他计算机不能访问
+"
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
