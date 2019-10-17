@@ -171,6 +171,16 @@ set softtabstop=4
 
 
 
+" ===========================================================
+
+
+" ==========
+" === 更改键位 noremap (示例：noremap n h) 指把 n 改成 h 的功能
+" ==========
+
+
+
+
 
 " ===========================================================
 
@@ -245,6 +255,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " ===
 "You Comlete ME
 "ale #检查代码插件
+
+" 美化插件
+Plug 'vim-airline/vim-airline'
 
 " Taglist 检测函数列表
 Plug 'majutsushi/tagbar', {'on':'TagbarOpenAutoClose'}
