@@ -178,6 +178,11 @@ set softtabstop=4
 " === 更改键位 noremap (示例：noremap n h) 指把 n 改成 h 的功能
 " ==========
 
+" Set <LEADER> as <SPACE>
+let mapleader=" "
+
+" Press space twice to jump to the next '<++>' and edit it
+map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
 
 
 
@@ -251,7 +256,8 @@ call plug#begin('~/.vim/plugged')
 " File Navigation
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
+" ctrl+n 开启、关闭nerdtree
+map <C-n> :NERDTreeToggle<CR>
 
 " ===
 "You Comlete ME
@@ -262,8 +268,6 @@ Plug 'vim-airline/vim-airline'
 
 " snazzy配色
 Plug 'connorholyday/vim-snazzy'
-" 更改为snazzy配色
-color snazzy
 
 " Taglist 检测函数列表
 Plug 'majutsushi/tagbar', {'on':'TagbarOpenAutoClose'}
@@ -295,15 +299,40 @@ call plug#end()
 
 
 
+" ==========
+" ===Snazzy
+" ==========
+
+" 更改为默认snazzy配色
+let g:lightline ={
+\ 'colorscheme': 'snazzy',
+\ }
+
+" 设置snazzy在vim的透明配色
+let g:SnazzyTransparent = 0.8
 
 
 
-" ===========================================================
 
+
+" ==========
+" ===召唤markdown达人
+" ==========
+source ~/.vim/snippits.vim
 
 " ==========
 " ===Markdown-preview
 " ==========
+
+" 普通模式
+nmap <silent> <F8> <Plug>MarkdownPreview
+" 插入模式
+imap <silent> <F8> <Plug>MarkdownPreview
+" 普通模式
+nmap <silent> <F9> <Plug>StopMarkdownPreview
+" 插入模式
+imap <silent> <F9> <Plug>StopMarkdownPreview
+
 "Uncomment to override defaults:
 "let g:instant_markdown_slow = 1
 "let g:instant_markdown_autostart = 0
@@ -315,38 +344,132 @@ call plug#end()
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
+" 
+" let g:mkdp_path_to_chrome = ""
+" " 设置 chrome 浏览器的路径（或是启动 chrome（或其他现代浏览器）的命令）
+" " 如果设置了该参数, g:mkdp_browserfunc 将被忽略
+" 
+" let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+" " vim 回调函数, 参数为要打开的 url
+" 
+" let g:mkdp_auto_start = 0
+" " 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
+"     " markdown 文件的时候打开一次
+" 
+" let g:mkdp_auto_open = 0
+" " 设置为 1 在编辑 markdown 的时候检查预览窗口是否已经打开，否则自动打开预
+" " 览窗口
+" 
+" let g:mkdp_auto_close = 1
+" " 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不
+" " 自动关闭预览窗口
+" 
+" let g:mkdp_refresh_slow = 0
+" " 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
+" " 更新预览
+" 
+" let g:mkdp_command_for_global = 0
+" " 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown文件可以使用改命令
+" 
+" let g:mkdp_open_to_the_world = 0
+" " 设置为 1, 在使用的网络中的其他计算机也能访问预览页面
+" " 默认只监听本地（127.0.0.1），其他计算机不能访问
 
-let g:mkdp_path_to_chrome = ""
-" 设置 chrome 浏览器的路径（或是启动 chrome（或其他现代浏览器）的命令）
-" 如果设置了该参数, g:mkdp_browserfunc 将被忽略
 
-let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
-" vim 回调函数, 参数为要打开的 url
 
+" ======= begin =======
+
+" 设置为1，nvim将进入markdown缓冲器后打开预览窗口
+" default: 0
 let g:mkdp_auto_start = 0
-" 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
-    " markdown 文件的时候打开一次
 
-let g:mkdp_auto_open = 0
-" 设置为 1 在编辑 markdown 的时候检查预览窗口是否已经打开，否则自动打开预
-" 览窗口
-
+" 设定为1时，nvim会自动关闭当前的预览窗口时，改变
+" 从markdown缓冲器到另一个缓冲器
+" default: 1
 let g:mkdp_auto_close = 1
-" 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不
-" 自动关闭预览窗口
 
+" 设置为1，vim将在保存缓冲区时刷新markdown或
+" 退出插入模式“，默认0是编辑时自动刷新markdown或
+" 移动光标
+" default: 0
 let g:mkdp_refresh_slow = 0
-" 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
-" 更新预览
 
+" 设置为1，MarkdownPreview命令可用于所有文件，
+"默认情况下，可在markdown文件中使用
+" default: 0
 let g:mkdp_command_for_global = 0
-" 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
-" 文件可以使用改命令
 
+"设置为1，预览服务器可供网络中的其他用户使用
+" 默认情况下，服务器在localhost（127.0.0.1）上侦听 
+" default: 0
 let g:mkdp_open_to_the_world = 0
-" 设置为 1, 在使用的网络中的其他计算机也能访问预览页面
-" 默认只监听本地（127.0.0.1），其他计算机不能访问
-"
+
+" 使用自定义IP打开预览页
+" 在远程vim中工作并在本地浏览器上预览时很有用
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" 指定浏览器打开预览页面
+" default: ''
+let g:mkdp_browser = 'chromium'
+
+" 设置为1，在命令行回波预览页面URL时打开预览页面
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page的自定义VIM函数名称以打开预览页面
+" this function will receive url as param这个函数将接收的URL作为PARAM
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" “降价渲染的选项
+" ” mkit：降价渲染的选项
+" “ katex：数学的katex选项
+" ” uml：markdown-it-plantuml选项
+" “女仆：人鱼选项
+" ” disable_sync_scroll：如果禁用同步滚动，默认0
+" “ sync_scroll_type：'middle'，'top'或'relative'，默认值为'middle'
+" ”    Middle：表示光标位置始终显示在预览页面的中间
+" “    top：表示vim top视口始终显示在预览页面顶部
+" ”   relative：
+" 始终在预览页面的相对位置上显示光标位置“ hide_yaml_meta：如果隐藏yaml元数据，默认值为1
+" ” sequence_diagrams：js-sequence-diagrams选项
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {}
+    \ }
+
+" use a custom markdown style must be absolute path使用自定义的降价风格必须是绝对路径
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path使用自定义的高亮样式必须绝对路径
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty使用自定义端口启动服务器，或者使用随机端口来清空
+let g:mkdp_port = ''
+
+" preview page title预览页面标题
+" ${name} will be replace with the file name $ {name}将替换为文件名
+let g:mkdp_page_title = '「${notes}」'
 
 
 
@@ -358,6 +481,3 @@ let g:mkdp_open_to_the_world = 0
 
 
 
-
-
-    
