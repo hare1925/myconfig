@@ -379,6 +379,8 @@ imap <silent> <F9> <Plug>StopMarkdownPreview
 
 " ======= begin =======
 
+let g:mkdp_path_to_chrome = ""
+
 " 设置为1，nvim将进入markdown缓冲器后打开预览窗口
 " default: 0
 let g:mkdp_auto_start = 0
@@ -447,6 +449,7 @@ let g:mkdp_browserfunc = ''
 " ”   relative：
 " 始终在预览页面的相对位置上显示光标位置“ hide_yaml_meta：如果隐藏yaml元数据，默认值为1
 " ” sequence_diagrams：js-sequence-diagrams选项
+"   \ 'sequence_diagrams': {}
 let g:mkdp_preview_options = {
     \ 'mkit': {},
     \ 'katex': {},
@@ -455,7 +458,6 @@ let g:mkdp_preview_options = {
     \ 'disable_sync_scroll': 0,
     \ 'sync_scroll_type': 'middle',
     \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {}
     \ }
 
 " use a custom markdown style must be absolute path使用自定义的降价风格必须是绝对路径
