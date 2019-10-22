@@ -275,7 +275,7 @@ Plug 'majutsushi/tagbar', {'on':'TagbarOpenAutoClose'}
 " Markdown-preview
 Plug 'iamcco/markdown-preview.vim'
 "Plug 'suan/vim-instant-markdown', {'for':'markdown'}
-"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'vimwiki/vimwiki'
 
 "vim-table-mode #自动补全表格格式
